@@ -1,6 +1,6 @@
 #!/bin/bash
 # Copiamos el .env si no existe
-cp -n .env.example .env
+cp --update=none .env.example .env
 
 # Descargamos las dependencias usando un mini-contenedor de Docker
 docker run --rm \
@@ -15,4 +15,4 @@ docker run --rm \
 
 # Configuramos Laravel
 ./vendor/bin/sail artisan key:generate
-./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan migrate --seed
