@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'role.management' => \App\Http\Middleware\EnsureUserIsAdminOrManager::class,
+            'face.verified' => \App\Http\Middleware\EnsureFaceIsVerified::class,
         ]);
 
         //

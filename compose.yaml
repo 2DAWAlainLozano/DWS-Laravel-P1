@@ -48,6 +48,17 @@ services:
                 - '${DB_USERNAME}'
             retries: 3
             timeout: 5s
+    face-service:
+        build:
+            context: ./microservicio_facial
+            dockerfile: Dockerfile
+        container_name: face-service
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./microservicio_facial:/app
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge

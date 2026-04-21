@@ -20,8 +20,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/games', [GameController::class, 'catalog'])->name('games.catalog');
-    Route::get('/games/{game}', [GameController::class, 'play'])->name('games.play');
+    Route::middleware('face.verified')->group(function () {
+        Route::get('/games', [GameController::class, 'catalog'])->name('games.catalog');
+        Route::get('/games/{game}', [GameController::class, 'play'])->name('games.play');
+    });
 
     Route::middleware('role.management')->group(function () {
         Route::resource('/manage/games', GameController::class)
@@ -33,7 +35,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
+use App\Http\Controllers\FaceEnrollmentController;
+use App\Http\Controllers\FaceVerificationController;
+
 Route::middleware('auth')->group(function () {
+    Route::get('/verify-face', [FaceVerificationController::class, 'show'])->name('face.verify.show');
+    Route::post('/verify-face', [FaceVerificationController::class, 'verify'])->name('face.verify');
+
+    Route::post('/profile/face-enrollment', [FaceEnrollmentController::class, 'store'])->name('profile.face.enrollment');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
