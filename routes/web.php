@@ -37,6 +37,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 use App\Http\Controllers\FaceEnrollmentController;
 use App\Http\Controllers\FaceVerificationController;
+use App\Http\Controllers\MessageController;
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/verify-face', [FaceVerificationController::class, 'show'])->name('face.verify.show');

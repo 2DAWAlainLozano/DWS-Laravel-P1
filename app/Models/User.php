@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany(Game::class);
     }
 
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public function hasRole(string $role): bool
     {
         return $this->role?->name === $role;
