@@ -8,3 +8,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/games/{game}/session-start', [GameApiController::class, 'sessionStart']);
     Route::post('/games/{game}/events', [GameApiController::class, 'event']);
 });
+
+Route::post('/github/webhook', [\App\Http\Controllers\GitHubWebhookController::class, 'handle']);
