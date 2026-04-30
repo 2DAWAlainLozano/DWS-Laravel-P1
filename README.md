@@ -1,4 +1,4 @@
-# CRM de Juegos (Laravel + Inertia + React)
+# CRM de Juegos (Laravel + Inertia + React) A
 
 Aplicacion CRM para gestionar y jugar juegos dentro de una plataforma con usuarios por rol:
 
